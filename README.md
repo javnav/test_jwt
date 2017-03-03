@@ -104,6 +104,7 @@ Traceback (most recent call last):
   File "/home/jnavarro/workspace/tests/JWT/python_jose/.venv/local/lib/python2.7/site-packages/jose/jwt.py", line 134, in decode
     raise JWTError(e)
 jose.exceptions.JWTError: Signature verification failed.
+```
 
 ## pycryptodome Examples
 https://pycryptodome.readthedocs.io/en/latest/src/examples.html#generate-an-rsa-key
@@ -111,6 +112,7 @@ https://pycryptodome.readthedocs.io/en/latest/src/examples.html#generate-an-rsa-
 ### Generate an RSA key
 The following code generates a new RSA key pair (secret) and saves it into a file, protected by a password. We use the scrypt key derivation function to thwart dictionary attacks. At the end, the code prints our the RSA public key in ASCII/PEM format:
 
+```
 from Crypto.PublicKey import RSA
 
 secret_code = "Unguessable"
@@ -122,9 +124,10 @@ file_out = open("rsa_key.bin", "wb")
 file_out.write(encrypted_key)
 
 print key.publickey().exportKey()
+```
 
 The following code reads the private RSA key back in, and then prints again the public key:
-
+```
 from Crypto.PublicKey import RSA
 
 secret_code = "Unguessable"
@@ -132,6 +135,7 @@ encoded_key = open("rsa_key.bin", "rb").read()
 key = RSA.import_key(encoded_key, passphrase=secret_code)
 
 print key.publickey().exportKey()
+```
 
 
 ### Read from file
@@ -200,6 +204,7 @@ print api_keys['TWITTER_SECRET'] # somebase64encodedkey
 ### Using pycrypto, how to import a RSA public key and use it to encrypt a string?
 
 I too had trouble with this. I got it working like this:
+
 ```
 key = RSA.generate(2048)
 
@@ -217,18 +222,18 @@ assert(msg == dmsg)
 ```
 
 If you're writing to files, you may find it easier to deal with hex strings instead of binary strings. I'm using these helper functions a lot
+
 ```
 
 def bin2hex(binStr):
     return binascii.hexlify(binStr)
 ```
 ```
-
 def hex2bin(hexStr):
     return binascii.unhexlify(hexStr)
 ```
 
-### Links
+# Links
 https://python-jose.readthedocs.io/en/latest/jwk/index.html#verifying-token-signatures
 http://learncodingfast.com/2015/04/14/python-tutorial-how-to-write-a-simple-encryptiondecryption-program/
 http://stackoverflow.com/questions/37289672/which-python-jose-library-supports-nested-jwt-signedencrypted
